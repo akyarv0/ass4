@@ -63,10 +63,12 @@ function App() {
     const data = await res.json();
     // console.log(data.results[0]);
     setUserData(data.results[0]);
+    
   };
 
   useEffect(() => {
     getUser();
+
   }, []);
 
   function addUser(newUser) {
