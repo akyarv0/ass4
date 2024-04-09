@@ -26,63 +26,92 @@ function App() {
     street: "",
   });
   const [users, setUsers] = useState([]);
+  const handleName = () => {
+    const value = `My name is ${userData.name.first} ${userData.name.last}`;
+    updateUserTitle(value);
+  };
 
-  const handleShow = (e) => {
-    const label = e.target.closest(".icon").getAttribute("data-label");
-    let value = "";
-    switch (label) {
-      case "name":
-        value = `My name is ${userData.name.first} ${userData.name.last}`;
-        break;
-      case "email":
-        value = `My email is ${userData.email}`;
-        break;
-      case "age":
-        const age = userData.dob.age;
-        value = `I am ${age} years old`;
-        break;
-      case "street":
-        value = `I live on ${userData.location.street.name}`;
-        break;
-      case "phone":
-        value = `My phone number is ${userData.phone}`;
-        break;
-      case "password":
-        value = `My password is ${userData.login.password}`;
-        break;
-      default:
-        value = "";
-    }
+  const handleEmail = () => {
+    const value = `My email is ${userData.email}`;
+    updateUserTitle(value);
+  };
+
+  const handleAge = () => {
+    const value = `I am ${userData.dob.age} years old`;
+    updateUserTitle(value);
+  };
+
+  const handleStreet = () => {
+    const value = `I live on ${userData.location.street.name}`;
+    updateUserTitle(value);
+  };
+
+  const handlePhone = () => {
+    const value = `My phone number is ${userData.phone}`;
+    updateUserTitle(value);
+  };
+
+  const handlePassword = () => {
+    const value = `My password is ${userData.login.password}`;
+    updateUserTitle(value);
+  };
+  const updateUserTitle = (value) => {
     const userTitle = document.querySelector(".user-title");
     if (userTitle) {
       userTitle.textContent = value;
     }
   };
+  // const handleShow = (e) => {
+  //   const label = e.target.closest(".icon").getAttribute("data-label");
+  //   let value = "";
+
+  //   switch (label) {
+  //     case "name":
+  //       value = `My name is ${userData.name.first} ${userData.name.last}`;
+  //       break;
+  //     case "email":
+  //       value = `My email is ${userData.email}`;
+  //       break;
+  //     case "age":
+  //       const age = userData.dob.age;
+  //       value = `I am ${age} years old`;
+  //       break;
+  //     case "street":
+  //       value = `I live on ${userData.location.street.name}`;
+  //       break;
+  //     case "phone":
+  //       value = `My phone number is ${userData.phone}`;
+  //       break;
+  //     case "password":
+  //       value = `My password is ${userData.login.password}`;
+  //       break;
+  //     default:
+  //       value = "";
+  //   }
+
+  //   const userTitle = document.querySelector(".user-title");
+  //   if (userTitle) {
+  //     userTitle.textContent = value;
+  //   }
+  // };
+
   const getUser = async () => {
     const res = await fetch(url);
     const data = await res.json();
     // console.log(data.results[0]);
     setUserData(data.results[0]);
-    
   };
 
   useEffect(() => {
     getUser();
-
   }, []);
 
   function addUser(newUser) {
-    // users is your current list of users
-    // newUser is the user object you want to add
-
-    // Check if the newUser already exists based on a unique identifier, e.g., email
     const userExists = users.some((user) => user.email === newUser.email);
 
     if (!userExists) {
-      // If the user doesn't exist, add them to the users array
       setUsers([...users, newUser]);
     } else {
-      // If the user exists, alert the user or handle it as you see fit
       alert("This user has already been added.");
     }
   }
@@ -103,7 +132,7 @@ function App() {
           </p>
           <p className="user-value"></p>
           <div className="values-list">
-            <button className="icon" data-label="name" onMouseOver={handleShow}>
+            <button className="icon" data-label="name" onMouseOver={handleName}>
               {userData.gender === "male" ? (
                 <img src={manSvg} alt="man" id="iconImg" />
               ) : (
@@ -113,31 +142,31 @@ function App() {
             <button
               className="icon"
               data-label="email"
-              onMouseOver={handleShow}
+              onMouseOver={handleEmail}
             >
               <img src={mailSvg} alt="mail" id="iconImg" />
             </button>
-            <button className="icon" data-label="age" onMouseOver={handleShow}>
+            <button className="icon" data-label="age" onMouseOver={handleAge}>
               <img src={womanAgeSvg} alt="age" id="iconImg" />
             </button>
             <button
               className="icon"
               data-label="street"
-              onMouseOver={handleShow}
+              onMouseOver={handleStreet}
             >
               <img src={mapSvg} alt="map" id="iconImg" />
             </button>
             <button
               className="icon"
               data-label="phone"
-              onMouseOver={handleShow}
+              onMouseOver={handlePhone}
             >
               <img src={phoneSvg} alt="phone" id="iconImg" />
             </button>
             <button
               className="icon"
               data-label="password"
-              onMouseOver={handleShow}
+              onMouseOver={handlePassword}
             >
               <img src={padlockSvg} alt="lock" id="iconImg" />
             </button>
