@@ -9,12 +9,7 @@ import phoneSvg from "./assets/phone.svg";
 import padlockSvg from "./assets/padlock.svg";
 import cwSvg from "./assets/cw.svg";
 
-
-
-
-
 const url = "https://randomuser.me/api/";
-const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
 
 function App() {
   const getUser = async () => {
@@ -26,10 +21,9 @@ function App() {
   useEffect(() => {
     getUser();
   }, []);
-  
+
   const [userData, setUserData] = useState({
     gender: "",
-
     name: "",
     email: "",
     dob: "",
@@ -42,7 +36,6 @@ function App() {
   const [users, setUsers] = useState([]);
 
   const [userTitle, setUserTitle] = useState("");
-
 
   const updateUserTitle = (value) => {
     setUserTitle(value);
@@ -216,7 +209,9 @@ function App() {
                     <td className="th">{user.email}</td>
                     <td className="th">{user.phone}</td>
                     <td className="th">{user.dob.age}</td>
-                    <button onClick={() => handleDelete(user.id)}><i class="bi bi-x-square">a</i></button>
+                    <button onClick={() => handleDelete(user.id)}>
+                      <i class="bi bi-x-square">a</i>
+                    </button>
                   </tr>
                 ))}
               </tbody>
