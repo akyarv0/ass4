@@ -191,9 +191,11 @@ p {
   height: 50px;
 }
 
-#cw {
-  width: 75px;
-  margin-top: 50px;
+#logo {
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 10px;
 }
 
 .btn-group {

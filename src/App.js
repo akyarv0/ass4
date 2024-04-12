@@ -9,6 +9,8 @@ import mapSvg from "./assets/map.svg";
 import phoneSvg from "./assets/phone.svg";
 import padlockSvg from "./assets/padlock.svg";
 import cwSvg from "./assets/cw.svg";
+import logo from "./assets/GTA V Logo.png"
+
 
 const url = "https://randomuser.me/api/";
 
@@ -129,7 +131,7 @@ function App() {
   return (
     <main>
       <div className="block bcg-orange">
-        <img src={cwSvg} alt="cw" id="cw" />
+        <img src={logo} alt="cw" id="logo" />
       </div>
       <div className="block">
         <div className="container">
