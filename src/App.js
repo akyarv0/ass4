@@ -9,10 +9,24 @@ import phoneSvg from "./assets/phone.svg";
 import padlockSvg from "./assets/padlock.svg";
 import cwSvg from "./assets/cw.svg";
 
+
+
+
+
 const url = "https://randomuser.me/api/";
 const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
 
 function App() {
+  const getUser = async () => {
+    const res = await fetch(url);
+    const data = await res.json();
+    // console.log(data.results[0]);
+    setUserData(data.results[0]);
+  };
+  useEffect(() => {
+    getUser();
+  }, []);
+  
   const [userData, setUserData] = useState({
     gender: "",
 
@@ -26,6 +40,20 @@ function App() {
     street: "",
   });
   const [users, setUsers] = useState([]);
+
+  const [userTitle, setUserTitle] = useState("");
+
+
+  const updateUserTitle = (value) => {
+    setUserTitle(value);
+  };
+
+  useEffect(() => {
+    const userTitleElement = document.querySelector(".user-title");
+    if (userTitleElement) {
+      userTitleElement.textContent = userTitle;
+    }
+  }, [userTitle]);
   const handleName = () => {
     const value = `My name is ${userData.name.first} ${userData.name.last}`;
     updateUserTitle(value);
@@ -55,12 +83,7 @@ function App() {
     const value = `My password is ${userData.login.password}`;
     updateUserTitle(value);
   };
-  const updateUserTitle = (value) => {
-    const userTitle = document.querySelector(".user-title");
-    if (userTitle) {
-      userTitle.textContent = value;
-    }
-  };
+
   // const handleShow = (e) => {
   //   const label = e.target.closest(".icon").getAttribute("data-label");
   //   let value = "";
@@ -95,17 +118,6 @@ function App() {
   //   }
   // };
 
-  const getUser = async () => {
-    const res = await fetch(url);
-    const data = await res.json();
-    // console.log(data.results[0]);
-    setUserData(data.results[0]);
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
   function addUser(newUser) {
     const userExists = users.some((user) => user.email === newUser.email);
 
@@ -115,6 +127,10 @@ function App() {
       alert("This user has already been added.");
     }
   }
+  const handleDelete = (id) => {
+    const updatedUsers = users.filter((user) => user.id !== id);
+    setUsers(updatedUsers);
+  };
 
   return (
     <main>
@@ -172,7 +188,7 @@ function App() {
             </button>
           </div>
           <div className="btn-group">
-            <button className="btn" type="button" onClick={getUser}>
+            <button className="btn" type="button" onClick={() => getUser()}>
               new user
             </button>
 
@@ -188,6 +204,7 @@ function App() {
                   <th className="th">Email</th>
                   <th className="th">Phone</th>
                   <th className="th">Age</th>
+                  <th className="th">Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -199,6 +216,7 @@ function App() {
                     <td className="th">{user.email}</td>
                     <td className="th">{user.phone}</td>
                     <td className="th">{user.dob.age}</td>
+                    <button onClick={() => handleDelete(user.id)}><i class="bi bi-x-square">a</i></button>
                   </tr>
                 ))}
               </tbody>
