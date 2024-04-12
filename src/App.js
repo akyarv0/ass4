@@ -4,6 +4,7 @@ import manSvg from "./assets/man.svg";
 import womanSvg from "./assets/woman.svg";
 import manAgeSvg from "./assets/growing-up-man.svg";
 import womanAgeSvg from "./assets/growing-up-woman.svg";
+import trashSvg from "./assets/trash3-fill.svg";
 import mapSvg from "./assets/map.svg";
 import phoneSvg from "./assets/phone.svg";
 import padlockSvg from "./assets/padlock.svg";
@@ -209,9 +210,9 @@ function App() {
                     <td className="th">{user.email}</td>
                     <td className="th">{user.phone}</td>
                     <td className="th">{user.dob.age}</td>
-                    <button onClick={() => handleDelete(user.id)}>
-                      <i class="bi bi-x-square">a</i>
-                    </button>
+                 
+                      <img src={trashSvg} alt="delete" id="iconImg-delete" onClick={() => handleDelete(user.id)} />
+                  
                   </tr>
                 ))}
               </tbody>
